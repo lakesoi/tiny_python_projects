@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """tests for jump.py"""
 
 import os
 from subprocess import getstatusoutput
 
-prg = './jump.py'
+prg = 'jump.py'
 
 
 # --------------------------------------------------
@@ -40,3 +40,13 @@ def test_02():
     rv, out = getstatusoutput(f'{prg} "That number to call is 098-765-4321."')
     assert rv == 0
     assert out.rstrip() == 'That number to call is 512-340-6789.'
+
+
+# --------------------------------------------------
+def test_03():
+    """test"""
+
+    rv, out = getstatusoutput(f'{prg} "That number to call is 098-765-4321." -t')
+    assert rv == 0
+    assert out.rstrip() == 'That number to call is zeronineeight-sevensixfive-fourthreetwoone.'
+

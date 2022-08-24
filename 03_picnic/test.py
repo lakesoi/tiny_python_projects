@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """tests for picnic.py"""
 
 import os
 from subprocess import getoutput
 
-prg = './picnic.py'
+prg = 'picnic.py'
 
 
 # --------------------------------------------------
@@ -65,4 +65,27 @@ def test_more_than_two_sorted():
     arg = 'bananas apples dates cherries'
     out = getoutput(f'{prg} {arg} --sorted')
     expected = ('You are bringing apples, bananas, cherries, and dates.')
+    assert out.strip() == expected
+
+
+# --------------------------------------------------
+def test_more_than_two_without_oxford():
+    """more than two items"""
+
+    arg = '"potato chips" coleslaw cupcakes "French silk pie"'
+    out = getoutput(f'{prg} {arg} --remove')
+    expected = ('You are bringing potato chips, coleslaw, '
+                'cupcakes and French silk pie.')
+    assert out.strip() == expected
+
+
+# --------------------------------------------------
+def test_more_than_two_delemeter():
+    """more than two items"""
+
+    arg = '"potato chips" coleslaw cupcakes "French silk pie"'
+    # out = getoutput(f'{prg} {arg} --delemeter "&"')
+    out = getoutput(f'{prg} {arg} --delemeter "^"')
+    expected = ('You are bringing potato chips^ coleslaw^ '
+                'cupcakes^ and French silk pie.')
     assert out.strip() == expected
